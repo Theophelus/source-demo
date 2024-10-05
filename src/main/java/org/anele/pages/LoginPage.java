@@ -22,4 +22,22 @@ public class LoginPage {
         configManager = new ConfigManager();
     }
 
+    //login into the Source Demo login page
+    public void login_credentials() {
+        //get username and password from config file
+        String username = configManager.getUsername();
+        String password = configManager.getPassword();
+        //type username and password
+        baseCore.typeRequiredValue(this.username, username);
+        //type username and password
+        baseCore.typeRequiredValue(this.password, password);
+    }
+
+    //click on login button
+    public void click_login_button(String value) {
+        if (!value.isEmpty()) {
+            baseCore.click(button);
+        }
+    }
+
 }
