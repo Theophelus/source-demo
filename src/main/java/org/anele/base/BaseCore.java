@@ -8,6 +8,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ThreadGuard;
 
 import java.time.Duration;
+import java.util.List;
 
 public class BaseCore {
     //define a Thread safe WebDrivers, to be able to use single thread of webDrivers a time
@@ -41,5 +42,16 @@ public class BaseCore {
             getDrivers().quit();
             WEB_DRIVERS.remove();//remove driver thread instance after each run
         }
+    }
+
+
+    //findElement single element
+    public WebElement find(By locator) {
+        return getDrivers().findElement(locator);
+    }
+
+    //findElements multiple elements
+    public List<WebElement> finds(By locator) {
+        return getDrivers().findElements(locator);
     }
 }
