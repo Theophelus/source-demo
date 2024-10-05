@@ -52,4 +52,14 @@ public class LoginSteps {
         Assert.assertTrue(products_header_text, "Provided product text do not match");
     }
 
+    @When("^the user enter invalid credentials \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void theUserEnterInvalidCredentialsAnd(String username, String password) {
+        loginPage.provide_login_credentials(username, password);
+    }
+
+    @Then("^the error message \"([^\"]*)\" is displayed$")
+    public void theErrorMessageIsDisplayed(String error_message) {
+        String actual_error_message = loginPage.verify_error_messages();
+        Assert.assertEquals(actual_error_message, error_message, "Provided values do not match");
+    }
 }
