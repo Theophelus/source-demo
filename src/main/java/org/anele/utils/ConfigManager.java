@@ -26,4 +26,17 @@ public class ConfigManager {
         }
     }
 
+    //getters for config file properties
+    public String getBaseUrl() {
+        return properties.getProperty("base.url");
+    }
+
+    public String getUsername() {
+        return properties.getProperty("username");
+    }
+
+    public String getPassword() {
+        return properties.getProperty("password");
+    }
+
 }
