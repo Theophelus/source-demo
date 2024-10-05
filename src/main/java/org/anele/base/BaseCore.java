@@ -73,4 +73,22 @@ public class BaseCore {
             System.out.println("Provided element not found: " + element.getText() + " " + e.getMessage());
         }
     }
+
+    //Method to click buttons
+    public void click(By locator) {
+        WebElement element = find(locator);
+        try {
+            //wait for button to be clickable
+            waitForElementToBeClickable(element, 30);
+            element.click();
+        } catch (Exception e) {
+            System.out.println("Element not clickable: " + element.getText() + " " + e.getMessage());
+        }
+    }
+
+    //method to wait for buttons to be clickable
+    public void waitForElementToBeClickable(WebElement element, int setTimeout) {
+        WebDriverWait wait = new WebDriverWait(getDrivers(), Duration.ofSeconds(setTimeout));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
 }
