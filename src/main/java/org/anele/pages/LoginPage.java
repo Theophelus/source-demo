@@ -14,8 +14,8 @@ public class LoginPage {
     protected By username = By.id("user-name");
     protected By password = By.id("password");
     protected By button = By.id("login-button");
-    //    protected By error_message = By.className("error-message-container error");
-//    protected By error_button = By.className("error-button");
+    protected By error_message = By.xpath("//h3[@data-test='error']");
+    //    protected By error_button = By.className("error-button");
     protected By products_header_text = By.xpath("//div[@class=\"header_secondary_container\"]/span");
 
     //add a construct, then initialize Base Core object.
@@ -35,6 +35,11 @@ public class LoginPage {
         baseCore.typeRequiredValue(this.password, password);
     }
 
+    public void provide_login_credentials(String username, String password) {
+        baseCore.typeRequiredValue(this.username, username);
+        baseCore.typeRequiredValue(this.password, password);
+    }
+
     //click on login button
     public void click_login_button(String value) {
         if (!value.isEmpty()) {
@@ -48,4 +53,7 @@ public class LoginPage {
         return element.getText().equalsIgnoreCase(value);
     }
 
+    public String verify_error_messages() {
+        return baseCore.find(this.error_message).getText();
+    }
 }
