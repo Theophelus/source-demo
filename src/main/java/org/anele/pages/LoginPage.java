@@ -3,6 +3,7 @@ package org.anele.pages;
 import org.anele.base.BaseCore;
 import org.anele.utils.ConfigManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class LoginPage {
 
@@ -13,8 +14,9 @@ public class LoginPage {
     protected By username = By.id("user-name");
     protected By password = By.id("password");
     protected By button = By.id("login-button");
-//    protected By error_message = By.className("error-message-container error");
+    //    protected By error_message = By.className("error-message-container error");
 //    protected By error_button = By.className("error-button");
+    protected By products_header_text = By.xpath("//div[@class=\"header_secondary_container\"]/span");
 
     //add a construct, then initialize Base Core object.
     public LoginPage() {
@@ -38,6 +40,12 @@ public class LoginPage {
         if (!value.isEmpty()) {
             baseCore.click(button);
         }
+    }
+
+    //verify landed successfully on products page
+    public Boolean verify_products_page(String value) {
+        WebElement element = baseCore.find(products_header_text);
+        return element.getText().equalsIgnoreCase(value);
     }
 
 }
