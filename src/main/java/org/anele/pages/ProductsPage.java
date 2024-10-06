@@ -34,6 +34,16 @@ public class ProductsPage {
             if (element.getText().equalsIgnoreCase(item)) {
                 System.out.println("Found");
 
+                //add to cart button to be clicked
+                WebElement add_to_cart_button = baseCore.find(By.xpath("//button[contains(text(),'Add to cart')]"));
+                //click add to cart button
+                add_to_cart_button.click();
+
+                //get cart size after adding the item
+                WebElement cart_size = baseCore.find(cart_index);
+                int cart_length = Integer.parseInt(cart_size.getText());
+                System.out.println("Cart size: " + cart_length);
+
 
             }
             //if provided item is not found, fail the test
