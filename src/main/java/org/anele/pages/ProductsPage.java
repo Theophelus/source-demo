@@ -44,6 +44,15 @@ public class ProductsPage {
                 int cart_length = Integer.parseInt(cart_size.getText());
                 System.out.println("Cart size: " + cart_length);
 
+                //if the cart has 2 0r more items click cart icon and break the loop
+                if (cart_length >= 2) {
+                    //cart icon
+                    WebElement click_cart_icon = baseCore.find(add_to_cart_icon);
+                    click_cart_icon.click();
+                    isFound = true;
+                    break;
+                }
+
 
             }
             //if provided item is not found, fail the test
