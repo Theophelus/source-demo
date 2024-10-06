@@ -1,12 +1,17 @@
 package org.anele.stepDef;
 
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.anele.base.BaseCore;
 import org.anele.pages.LoginPage;
+import org.anele.pages.ProductsPage;
 import org.anele.utils.ConfigManager;
 import org.testng.Assert;
+
+import java.util.List;
 
 public class LoginSteps {
     //define objects to be used
@@ -14,11 +19,14 @@ public class LoginSteps {
     BaseCore baseCore;
     ConfigManager configManager;
 
+    ProductsPage productsPage;
+
     public LoginSteps() {
         this.baseCore = new BaseCore();
         this.configManager = new ConfigManager();
         this.configManager.loadProperties(); // Ensure properties are loaded
         this.loginPage = new LoginPage();
+        this.productsPage = new ProductsPage();
     }
 
 
@@ -62,4 +70,5 @@ public class LoginSteps {
         String actual_error_message = loginPage.verify_error_messages();
         Assert.assertEquals(actual_error_message, error_message, "Provided values do not match");
     }
+
 }
