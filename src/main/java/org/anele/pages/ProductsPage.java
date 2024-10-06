@@ -27,6 +27,19 @@ public class ProductsPage {
             throw new NoSuchElementException("Provided lists are empty");
         }
 
+        //loop through the list of products
+        for (WebElement element : elementList) {
+
+            //check if current product matches provided item
+            if (element.getText().equalsIgnoreCase(item)) {
+                System.out.println("Found");
+
+
+            }
+            //if provided item is not found, fail the test
+            if (!isFound) throw new NoSuchElementException("Provided items not found in the product list");
+        }
+
 
     }
 
