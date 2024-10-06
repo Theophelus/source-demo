@@ -30,5 +30,39 @@ public class CheckoutPage {
         baseCore.typeRequiredValue(zip_code, checkout_info.address().zipCode());
     }
 
+    //click on the continue button
+    public void click_continue() {
+        try {
+            baseCore.click(continue_btn);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to click continue button", e.getCause());
+        }
+    }
+
+    //click on finish button
+    public void click_finish() {
+        try {
+            baseCore.click(finish_btn);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to click finish button", e.getCause());
+        }
+    }
+
+    //verify Checkout overview text
+    public String checkout_overview(String value) {
+        String actualValue = baseCore.find(overview).getText();
+        if (actualValue.equalsIgnoreCase(value))
+            return actualValue;
+        else
+            throw new AssertionError("Expected header text: '" + value + "'" + " " + "but found: '" + actualValue + "' ");
+    }
+
+    public boolean verify_order_header(String value) {
+        try {
+            return baseCore.find(order_header).getText().equalsIgnoreCase(value);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get cart header text", e.getCause());
+        }
+    }
 
 }
