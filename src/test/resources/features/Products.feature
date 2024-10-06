@@ -2,6 +2,7 @@ Feature: Products Sauce Demo Page
 
   User should be able to filter, products and add them to the cart.
 
+  @products
   Scenario: Add 2 items to the cart
     Given the user lands on Sauce Demo Landing page
     When the user enter valid credentials

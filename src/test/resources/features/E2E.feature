@@ -7,6 +7,7 @@ Feature: End to end checkout
     When the user enter valid credentials
     And the user clicks on the "Login" button
 
+  @e2e
   Scenario: User adds items in the cart and complete checkout
     When the user adds these two items to the cart:
       | Sauce Labs Backpack   |
