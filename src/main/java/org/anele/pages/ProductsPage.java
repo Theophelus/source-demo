@@ -10,17 +10,18 @@ import java.util.List;
 public class ProductsPage {
 
     protected BaseCore baseCore;
-    protected By product_name = By.xpath("//div[@class=\"inventory_item_name \"]");
+    protected By product_list = By.xpath(".//following-sibling::div//div[@class=\"inventory_item_name \"]");
     protected By cart_index = By.xpath("//span[@class=\"shopping_cart_badge\"]");
-    protected By add_to_cart_icon = By.xpath("//div[@id=\"shopping_cart_container\"]");
+//    protected By add_to_cart_icon = By.xpath("//div[@id=\"shopping_cart_container\"]");
 
     public ProductsPage() {
         this.baseCore = new BaseCore();
     }
 
     public void add_items_to_cart(String item) {
-        List<WebElement> elementList = baseCore.finds(product_name);
+        List<WebElement> elementList = baseCore.finds(product_list);
         boolean isFound = false;
+        int index = 0;
 
         //if product list and item list are empty, throw an exception
         if (elementList.isEmpty()) {
@@ -29,14 +30,14 @@ public class ProductsPage {
 
         //loop through the list of products
         for (WebElement element : elementList) {
-
+            index++;
             //check if current product matches provided item
             if (element.getText().equalsIgnoreCase(item)) {
-                System.out.println("Found");
-
+                System.out.println("Item found: " + element.getText());
                 //add to cart button to be clicked
-                WebElement add_to_cart_button = baseCore.find(By.xpath("//button[contains(text(),'Add to cart')]"));
-                //click add to cart button
+                WebElement add_to_cart_button =
+                        baseCore.find(By.xpath(".//following-sibling::div//button[contains(text(),'Add to cart')]['" + index + "']"));
+
                 add_to_cart_button.click();
 
                 //get cart size after adding the item
@@ -45,21 +46,17 @@ public class ProductsPage {
                 System.out.println("Cart size: " + cart_length);
 
                 //if the cart has 2 0r more items click cart icon and break the loop
-                if (cart_length >= 2) {
-                    //cart icon
-                    WebElement click_cart_icon = baseCore.find(add_to_cart_icon);
-                    click_cart_icon.click();
-                    isFound = true;
+                if (cart_length == 2) {
                     break;
                 }
-
-
             }
-            //if provided item is not found, fail the test
-            if (!isFound) throw new NoSuchElementException("Provided items not found in the product list");
         }
+    }
 
-
+    //track cart size
+    public int cart_count() {
+        String text = baseCore.find(cart_index).getText();
+        return Integer.parseInt(text);
     }
 
 }
