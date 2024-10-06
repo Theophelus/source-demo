@@ -12,7 +12,7 @@ public class ProductsPage {
     protected BaseCore baseCore;
     protected By product_list = By.xpath(".//following-sibling::div//div[@class=\"inventory_item_name \"]");
     protected By cart_index = By.xpath("//span[@class=\"shopping_cart_badge\"]");
-//    protected By add_to_cart_icon = By.xpath("//div[@id=\"shopping_cart_container\"]");
+    protected By add_to_cart_icon = By.xpath("//div[@id=\"shopping_cart_container\"]");
 
     public ProductsPage() {
         this.baseCore = new BaseCore();
@@ -57,6 +57,10 @@ public class ProductsPage {
     public int cart_count() {
         String text = baseCore.find(cart_index).getText();
         return Integer.parseInt(text);
+    }
+
+    public void click_cart_icon() {
+        baseCore.click(add_to_cart_icon);
     }
 
 }
