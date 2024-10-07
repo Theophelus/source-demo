@@ -2,8 +2,11 @@ package org.anele.hooks;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import org.anele.base.BaseCore;
 import org.anele.utils.ConfigManager;
+import org.openqa.selenium.TakesScreenshot;
+
 
 public class Hooks {
     protected static ConfigManager configManager;
@@ -23,7 +26,16 @@ public class Hooks {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown(Scenario scenario) {
+
+        if (scenario.isFailed()) {
+            //get method name
+            String screenshotName = scenario.getName().replaceAll("\\s", "_");
+
+            // Convert WebDriver object to TakeScreenshot
+            TakesScreenshot screenshot = (TakesScreenshot) baseCore.getDrivers();
+
+        }
         baseCore.tearDown();
     }
 }
